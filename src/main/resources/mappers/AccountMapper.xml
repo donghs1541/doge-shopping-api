@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.dogeapi.mapper.AccountRepository">
+
+    <insert id="insertAccount">
+        insert into Account(name,email,id,password,phonenumber,nickname)
+        values(#{name},#{email},#{id},#{password},#{phoneNumber},#{nickname})
+    </insert>
+
+    <update id="updateAccount">
+        update Account
+        set
+        <if test = "name != null">
+            name = #{name}
+        </if>
+        <if test="email != null">
+            email = #{email}
+        </if>
+        <if test="id != null">
+            id = #{id}
+        </if>
+        <if test="password != null">
+            password = #{password}
+        </if>
+        <if test="phoneNumber != null">
+            phoneNumber = #{phoneNumber}
+        </if>
+        <if test="nickname != null">
+            nickname = #{nickname}
+        </if>
+        where idx = #{idx}
+    </update>
+
+    <delete id="deleteAccount">
+        delete from Account
+        where idx = #{idx}
+    </delete>
+
+    <select id="getAccountByIdx" resultType="com.example.dogeapi.account.model.Account">
+        select idx, name, email, id, password,phonenumber,nickname
+        from account
+        where idx = #{idx}
+    </select>
+
+    <select id="getAccountById" resultType="com.example.dogeapi.account.model.Account">
+        select idx, name, email, id, password,phonenumber,nickname
+        from account
+        where id = #{id}
+    </select>
+
+    <select id="getIdById" resultType="string">
+        select id
+        from account
+        where id = #{id}
+    </select>
+
+    <select id="duplicateCheckAccount" resultType="int">
+        select count(idx)
+        from account
+        where id = #{id} and email = #{email}
+    </select>
+</mapper>

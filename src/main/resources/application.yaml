@@ -1,0 +1,30 @@
+server:
+  port: 8081
+  servlet:
+    session:
+     tracking-modes: cookie
+runtime: java11
+spring:
+  hikari:
+    datasource:
+      url: jdbc:postgresql://127.0.0.1:5432/postgres
+      username: postgres
+      password: 1234
+      driver-class-name: org.postgresql.Driver
+      idle-timeout: 10000
+      max-lifetime: 420000
+      connection-timeout : 10000
+      validation-timeout : 10000
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: postgres
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  type-aliases-package: com.example.dogeapi
+  mapper-locations: classpath:mappers/**/*.xml
