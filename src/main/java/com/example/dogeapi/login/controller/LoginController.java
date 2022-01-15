@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -37,7 +38,7 @@ public class LoginController {
 
     private final LoginService loginService;
     private final AccountRepository accountRepository;
-    //private final SessionManager sessionManager;
+    private final SessionManager sessionManager;
 
 
     /**
@@ -46,18 +47,19 @@ public class LoginController {
      * @return
      */
     @GetMapping("/")
-    public ResponseEntity<Account> homeLogin(Account loginAccount){  //fixme: 추후에 쿠키, 인터셉터를 통해 세셩 정보 확인하기.
+    public ResponseEntity<Account> homeLogin(@Login Account loginAccount){  //fixme: 추후에 쿠키, 인터셉터를 통해 세셩 정보 확인하기.
         log.info("로그인 요청");
         if (loginAccount == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else{
-            return new ResponseEntity<>(accountRepository.getAccountById(loginAccount.getId()),HttpStatus.PERMANENT_REDIRECT);
+            return new ResponseEntity<>(loginAccount,HttpStatus.PERMANENT_REDIRECT);
         }
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<Account> homeLogin(@RequestBody LoginInfo loginInfo){
+    public ResponseEntity<Boolean> homeLogin(@RequestBody LoginInfo loginInfo
+                                             ,HttpServletRequest request) {
 
         if (loginInfo == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -68,24 +70,14 @@ public class LoginController {
         if(loginAccount == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(accountRepository.getAccountById(loginInfo.getLoginId()),HttpStatus.ACCEPTED);
 
-//        //로그인 성공
-//        HttpSession session = request.getSession();
-//        session.setAttribute(SessionConst.LOGIN_MEMBER,loginAccount);
-//
-//        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
-//        boolean firstHeader = true;
-//
-//        for(String header: headers){
-//            if(firstHeader){
-//                response.setHeader(HttpHeaders.SET_COOKIE, String.format("%s; Secure; %s", header, "SameSite=None"));
-//                firstHeader = false;
-//                continue;
-//            }
-//            response.addHeader(HttpHeaders.SET_COOKIE, String.format("%s; Secure; %s", header, "SameSite=None"));
-//        }
-      //  return new ResponseEntity<>(true,HttpStatus.ACCEPTED);
+        //로그인 성공 처리
+        //세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
+        HttpSession session = request.getSession();
+        //세션에 로그인 회원 정보 보관
+        session.setAttribute(SessionConst.LOGIN_MEMBER, loginAccount);
+
+        return new ResponseEntity<>(true,HttpStatus.PERMANENT_REDIRECT);
     }
 
     /**

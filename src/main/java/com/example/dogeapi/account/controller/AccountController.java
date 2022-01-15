@@ -15,7 +15,7 @@ import org.thymeleaf.util.StringUtils;
 @RequestMapping("/account")
 @AllArgsConstructor
 @Slf4j
-@CrossOrigin("http://qpflapffhs76.ddns.net:4000")
+@CrossOrigin("https://doge123.netlify.app/")
 public class AccountController {
 
     private final AccountService accountService;
