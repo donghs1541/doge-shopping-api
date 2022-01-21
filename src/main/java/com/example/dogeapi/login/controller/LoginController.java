@@ -77,6 +77,8 @@ public class LoginController {
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginAccount);
 
+        log.info("세션을 성공적으로 생성하였습니다. {}",session.getId());
+
         return new ResponseEntity<>(true,HttpStatus.OK);
     }
 

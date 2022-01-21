@@ -2,7 +2,7 @@ server:
   port: 8081
   servlet:
     session:
-     tracking-modes: cookie
+
 runtime: java11
 spring:
   hikari:
