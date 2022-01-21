@@ -1,9 +1,7 @@
 package com.example.dogeapi.account.service;
 
-import com.example.dogeapi.account.controller.AccountController;
 import com.example.dogeapi.account.model.Account;
 import com.example.dogeapi.mapper.AccountRepository;
-import com.example.dogeapi.account.model.AccountResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -45,9 +43,8 @@ public class AccountServiceImpl implements AccountService{
 
     @Override
     @Transactional
-    public void deleteAccount(Account account){
-        long idx = account.getIdx();
-        accountRepository.deleteAccount(idx);
+    public void deleteAccount(Long idx){
+        accountRepository.inactiveAccount(idx);
         log.info("ACOT:UPDT:RSPS:::회원정보 삭제 성공 idx={}",idx);
     }
 

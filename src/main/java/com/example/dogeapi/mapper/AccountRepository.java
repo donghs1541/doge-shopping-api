@@ -10,7 +10,7 @@ public interface AccountRepository {
 
     long insertAccount(Account account);
     long updateAccount(Account account);
-    void deleteAccount(long account);
+    void inactiveAccount(Long idx);
     Account getAccountByIdx(long idx);
     Account getAccountById(String Id);
     int duplicateCheckAccount(Account account);

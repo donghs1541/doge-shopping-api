@@ -34,8 +34,8 @@
         where idx = #{idx}
     </update>
 
-    <delete id="deleteAccount">
-        delete from Account
+    <delete id="inactiveAccount">
+        update Account set status = 'INACTIVE'
         where idx = #{idx}
     </delete>
 

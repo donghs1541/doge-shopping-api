@@ -15,7 +15,6 @@ import org.thymeleaf.util.StringUtils;
 @RequestMapping("/account")
 @AllArgsConstructor
 @Slf4j
-@CrossOrigin("https://doge123.netlify.app/")
 public class AccountController {
 
     private final AccountService accountService;
@@ -56,14 +55,14 @@ public class AccountController {
     }
 
     @DeleteMapping
-    public ResponseEntity<Long> deleteAccount(AccountRequest accountRequest,@Param("register") String register){
-        if(accountRequest.isValid()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Long> deleteAccount(@Param("idx") Long idx,@Param("register") String register){
+        if(idx == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         try{
-            log.info("ACOT:SIUP:RQST:::회원가입 삭제 요청 AccountRequest={}",accountRequest);
-            accountService.deleteAccount(accountRequest.getAccount());
+            log.info("ACOT:SIUP:RQST:::회원탈퇴 요청 idx={}",idx);
+            accountService.deleteAccount(idx);
             return new ResponseEntity<>(HttpStatus.ACCEPTED);
         }catch (Exception e){
-            log.warn("ACOT:SIUP:____:::회원정보 삭제 실패 Exception={}",e.getMessage(),e);
+            log.warn("ACOT:SIUP:____:::회원탈퇴 실패 Exception={}",e.getMessage(),e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

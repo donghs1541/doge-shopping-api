@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry){
         log.info("CorsMapping complete");
         registry.addMapping("/**")
-                .allowedOrigins("https://doge123.netlify.app/","https://doge123.netlify.app")
+                .allowedOrigins("https://ctdlog.github.io/doge-web","https://ctdlog.github.io/doge-web/","https://ctdlog.github.io/")
                 .allowCredentials(true);
     }
 

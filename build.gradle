@@ -42,3 +42,8 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+bootJar {
+	archivesBaseName='dogestore'
+	archiveFileName='dogestore.jar'
+}

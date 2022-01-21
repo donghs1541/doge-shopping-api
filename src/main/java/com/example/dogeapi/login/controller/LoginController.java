@@ -47,8 +47,8 @@ public class LoginController {
      * @return
      */
     @GetMapping("/")
-    public ResponseEntity<Account> homeLogin(@Login Account loginAccount){  //fixme: 추후에 쿠키, 인터셉터를 통해 세셩 정보 확인하기.
-        log.info("로그인 요청");
+    public ResponseEntity<Account> homeLogin(@Login Account loginAccount){
+        log.info("로그인 요청 {}",loginAccount);
         if (loginAccount == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else{
@@ -77,7 +77,7 @@ public class LoginController {
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginAccount);
 
-        return new ResponseEntity<>(true,HttpStatus.PERMANENT_REDIRECT);
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
     /**

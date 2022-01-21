@@ -8,6 +8,6 @@ public interface AccountService {
     Account getAccount(long idx);
     long insertAccount(Account account);
     long updateAccount(Account account);
-    void deleteAccount(Account account);
+    void deleteAccount(Long idx);
     boolean checkAccount(String id);
 }

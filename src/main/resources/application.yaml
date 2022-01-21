@@ -7,7 +7,7 @@ runtime: java11
 spring:
   hikari:
     datasource:
-      url: jdbc:postgresql://127.0.0.1:5432/postgres
+      url: jdbc:postgresql://116.35.177.202:5432/postgres
       username: postgres
       password: 1234
       driver-class-name: org.postgresql.Driver
@@ -15,12 +15,12 @@ spring:
       max-lifetime: 420000
       connection-timeout : 10000
       validation-timeout : 10000
-    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    url: jdbc:postgresql://116.35.177.202:5432/postgres
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    url: jdbc:postgresql://116.35.177.202:5432/postgres
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
