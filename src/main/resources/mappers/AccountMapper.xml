@@ -33,6 +33,18 @@
         </if>
         where idx = #{idx}
     </update>
+    <update id="updateList">
+        <foreach item="member" index="index" collection="accountList" separator=";">
+            update account set
+            name = #{member.name},
+            email = #{member.email},
+            id = #{member.id},
+            password = #{member.password},
+            phonenumber = #{member.phoneNumber},
+            nickname = #{member.nickname},
+           member_tier = #{member.memberTier};
+        </foreach>
+    </update>
 
     <delete id="inactiveAccount">
         update Account set status = 'INACTIVE'
@@ -61,5 +73,8 @@
         select count(idx)
         from account
         where id = #{id} and email = #{email}
+    </select>
+    <select id="getAll" resultType="com.example.dogeapi.account.model.Account">
+        Select * from account
     </select>
 </mapper>

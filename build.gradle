@@ -25,6 +25,7 @@ dependencies {
 	//implementation group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.0.1' 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
 	implementation 'org.springframework.session:spring-session-core'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-batch'
 
 	implementation 'javax.xml.bind:jaxb-api'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'

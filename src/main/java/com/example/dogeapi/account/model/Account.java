@@ -12,4 +12,5 @@ public class Account {
     private String password;
     private String phoneNumber;
     private String nickname;
+    private String memberTier = "임시회원";
 }
