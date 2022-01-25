@@ -28,7 +28,8 @@ public class WebConfig implements WebMvcConfigurer {
         log.info("CorsMapping complete");
         registry.addMapping("/**")
                 .allowedOrigins("https://ctdlog.github.io/doge-web","https://ctdlog.github.io/doge-web/","https://ctdlog.github.io/")
-                .allowCredentials(true);
+                .allowCredentials(true)
+                .allowedMethods("*");
     }
 
     @Override
