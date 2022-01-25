@@ -48,9 +48,22 @@ public class JobConfiguration {
                 })
                 .build();
     }
+
+
+
+
+
+
+
+    @Bean
+    public Job scopeJob() {
+        return jobBuilderFactory.get("scopeJob")
+                .start(scopeStep1(null))
+                .build();
+    }
     @Bean
     @JobScope
-    public Step scopeStep1(@Value("#{jobParameters[requestDate]}") String requestDate){ //Jobparameters 사용하는 이유.
+    public Step scopeStep1(@Value("#{jobParameters[requestDate]}") String requestDate){ //Jobparameters 사용하는 이유.  레이팅 바인드.
         return stepBuilderFactory.get("scopeStep1")
                 .tasklet((contribution, chunkContext) -> {
                     log.info(">>>>> This is scopeStep1");
@@ -73,6 +86,7 @@ public class JobConfiguration {
         return jobBuilderFactory.get("completeUserJob")
                 .incrementer(new RunIdIncrementer())
                 .start(completeJobStep)
+                .next(simpleStep1()) // 다음 step을 실행시키는 명령어
                 .build();
     }
     @Bean
