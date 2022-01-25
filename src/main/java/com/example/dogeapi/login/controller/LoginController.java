@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -59,7 +60,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> homeLogin(@RequestBody LoginInfo loginInfo
-                                             ,HttpServletRequest request) {
+                                             ,HttpServletRequest request,HttpServletResponse response) {
 
         if (loginInfo == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -76,6 +77,10 @@ public class LoginController {
         HttpSession session = request.getSession();
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginAccount);
+
+        Cookie idCookie = new Cookie("AccountInfo",
+                String.valueOf(loginAccount));
+        response.addCookie(idCookie);
 
         log.info("세션을 성공적으로 생성하였습니다. {}",session.getId());
 
