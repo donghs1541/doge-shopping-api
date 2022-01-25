@@ -81,6 +81,7 @@ public class LoginController {
                 String.valueOf(loginAccount.getId()));
         idCookie.setSecure(true);
         idCookie.setPath("/");
+        idCookie.setHttpOnly(false);
         response.addCookie(idCookie);
 
 
