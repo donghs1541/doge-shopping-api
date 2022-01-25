@@ -80,7 +80,7 @@ public class LoginController {
         Cookie idCookie = new Cookie("Account",
                 String.valueOf(loginAccount.getId()));
         idCookie.setSecure(true);
-        idCookie.setDomain("ctdlog.github.io");
+        idCookie.setPath("/");
         response.addCookie(idCookie);
 
 
