@@ -78,8 +78,8 @@ public class LoginController {
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_MEMBER, loginAccount);
 
-        Cookie idCookie = new Cookie("AccountInfo",
-                String.valueOf(loginAccount));
+        Cookie idCookie = new Cookie("Account",
+                String.valueOf(loginAccount.getId()));
         response.addCookie(idCookie);
 
         log.info("세션을 성공적으로 생성하였습니다. {}",session.getId());
