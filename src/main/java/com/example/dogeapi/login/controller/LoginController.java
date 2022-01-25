@@ -80,7 +80,9 @@ public class LoginController {
 
         Cookie idCookie = new Cookie("Account",
                 String.valueOf(loginAccount.getId()));
+        idCookie.setSecure(true);
         response.addCookie(idCookie);
+
 
         log.info("세션을 성공적으로 생성하였습니다. {}",session.getId());
 
